@@ -1,0 +1,20 @@
+<div id="podcast_show">
+	<div id="show_banner">
+		<div class="wrapper_skinny">
+			<h1><%= @podcast.title %></h1>
+		</div>
+	</div>
+
+	<div id="links">
+		<div class="wrapper_skinny">
+			<ul>
+				<li><%= link_to "Bölümler", root_path %></li>
+				<li><%= link_to "Bölüm Ekle", new_podcast_episode_path(@podcast), class: "current" %></li>
+        		<li><%= link_to "Profil Ayarları", edit_podcast_registration_path %></li>
+				<li><%= link_to "Kanalım", current_podcast %></li>
+			</ul>
+		</div>
+	</div>
+
+	<%= render 'form' %>
+</div>

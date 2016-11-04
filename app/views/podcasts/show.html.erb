@@ -1,0 +1,45 @@
+<div id="podcast_show">
+	<div id="show_banner">
+		<div class="wrapper_skinny">
+			<h1><%= @podcast.title %></h1>
+			<p class="description"><%= @podcast.description %></p>
+			<% unless @podcast.itunes.blank? %>
+				<%= link_to "iTunes", @podcast.itunes, class: "subscribe_link", target: "_blank" %>
+			<% end %>
+			<% unless @podcast.stitcher.blank? %>
+				<%= link_to "Stitcher", @podcast.stitcher, class: "subscribe_link", target: "_blank" %>
+			<% end %>
+			<% unless @podcast.podbay.blank? %>
+				<%= link_to "RodBay", @podcast.podbay, class: "subscribe_link", target: "_blank" %>
+			<% end %>
+		</div>
+	</div>
+
+	<div id="breadcrumb">
+		<%= link_to "Tüm Kanallar", podcasts_path %>
+		<span>/</span>
+		<%= link_to @podcast.title, @podcast %>
+	</div>
+
+	<div id="episodes">
+		<div class="wrapper_skinny">
+			<ul class="clearfix">
+				<% @episodes.each do |episode| %>
+					<li class="clearfix">
+						<div class="episode_thumbnail">
+							<%= link_to podcast_episode_path(@podcast, episode) do %>
+								<%= image_tag episode.episode_thumbnail.url(:medium) %>
+							<% end %>
+						</div>
+						<div class="episode_overview">
+							<h2><%= link_to episode.title, podcast_episode_path(@podcast, episode) %></h2>
+							<p class="description"><%= truncate(episode.description, length: 200) %></p>
+						</div>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>		
+
+<%= will_paginate @episodes %>

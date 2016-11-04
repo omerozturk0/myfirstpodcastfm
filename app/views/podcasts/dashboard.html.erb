@@ -1,0 +1,44 @@
+<div id="podcast_show">
+	<div id="show_banner">
+		<div class="wrapper_skinny">
+			<h1><%= @podcast.title %></h1>
+		</div>
+	</div>
+
+	<div id="links">
+		<div class="wrapper_skinny">
+			<ul>
+				<li><%= link_to "Bölümler", root_path, class: "current" %></li>
+				<li><%= link_to "Bölüm Ekle", new_podcast_episode_path(@podcast) %></li>
+        		<li><%= link_to "Profil Ayarları", edit_podcast_registration_path %></li>
+				<li><%= link_to "Kanalım", current_podcast %></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="episodes">
+		<div class="wrapper_skinny">
+			<ul class="clearfix">
+				<% @episodes.each do |episode| %>
+					<li class="clearfix">
+						<div class="episode_thumbnail">
+							<%= link_to podcast_episode_path(@podcast, episode) do %>
+								<%= image_tag episode.episode_thumbnail.url(:medium) %>
+							<% end %>
+						</div>
+						<div class="episode_overview">
+							<h2><%= link_to episode.title, podcast_episode_path(@podcast, episode) %></h2>
+							<p class="description"><%= truncate(episode.description, length: 200) %></p>
+							<div class="authorized_links">
+								<%= link_to "Düzenle", edit_podcast_episode_path(@podcast, episode) %>
+								<%= link_to "Sil", podcast_episode_path(@podcast, episode), method: "delete", data: { confirm: "Emin misiniz?" } %>
+							</div>
+						</div>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>		
+
+<%= will_paginate @episodes %>

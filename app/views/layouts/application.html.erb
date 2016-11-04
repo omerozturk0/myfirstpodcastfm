@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PodcastFm</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </head>
+  <body>
+    <% if notice %>
+      <div class="message_wrapper">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% elsif alert %>
+      <div class="message_wrapper">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    
+    <% unless controller_name == "welcome" && action_name == "index" %>
+      <header id="main_header" class="clearfix">
+        <div class="wrapper_wide">
+          <%= link_to "Podcast.fm", root_path, id: "logo" %>
+          <nav>
+            <ul>
+              <li><%= link_to "Kanallar", podcasts_path %></li>
+              <% unless podcast_signed_in? %>
+                <li><%= link_to "Giriş Yap", new_podcast_session_path %></li>
+                <li><%= link_to "Kanal Oluştur", new_podcast_registration_path %></li>
+              <% else %>
+                <li><%= link_to "Dashboard", root_path %></li>
+                <li><%= link_to "Çıkış Yap", destroy_podcast_session_path, method: "delete" %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    <% end %>
+
+    <%= yield %>
+    
+    <script>
+      $(function () {
+        function delete_message_wrapper() {
+          $(".message_wrapper").fadeOut("slow", function () {
+            $(this).remove();
+          });
+        }
+
+        $(".message_wrapper").bind("click", function () {
+          delete_message_wrapper();
+        });
+
+        setTimeout(delete_message_wrapper, 3000);
+      })
+    </script>
+  </body>
+</html>

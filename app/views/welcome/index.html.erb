@@ -1,0 +1,20 @@
+<div id="background">
+	<header class="clearfix">
+		<div class="wrapper_wide">
+			<%= link_to "Podcast.fm", root_path, id: "logo" %>
+			<nav>
+				<ul>
+					<li><%= link_to "Kanallar", podcasts_path %></li>
+					<li><%= link_to "Giriş Yap", new_podcast_session_path %></li>
+					<li><%= link_to "Kanal Oluştur", new_podcast_registration_path %></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div class="wrapper_skinny">
+		<h1>Ne yapacağım diye düşünme <br> kanalını oluştur ve bir an önce <br> yayın yapmaya başla.</h1>
+		<%= link_to "Kanal Oluştur", new_podcast_registration_path, class: "button button_highlight" %>
+		<%= link_to "Kanallar", podcasts_path, class: "button button_white" %>
+	</div>
+</div>

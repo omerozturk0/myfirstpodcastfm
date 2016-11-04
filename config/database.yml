@@ -1,0 +1,26 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  database: podcast_fm
+  pool: 5
+  username: omerozturk
+  password: 123456omer
+
+development:
+  <<: *default
+  database: podcast_fm
+
+test:
+  <<: *default
+  database: podcast_fm
+
+production:
+  <<: *default
+  database: podcast_fm

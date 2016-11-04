@@ -1,0 +1,23 @@
+<div id="banner" class="podcasts_banner">
+	<h1>Yeni favori kanalınızı keşfedin.</h1>
+</div>
+
+<div id="podcasts" class="clearfix">
+	<div class="wrapper">
+		<ul>
+			<% @podcasts.each do |podcast| %>
+				<%= link_to podcast do %>
+					<li>
+						<%= image_tag podcast.thumbnail.url(:medium) %>
+						<div class="podcast_overview">
+							<h2><%= podcast.title %></h2>
+							<p class="episode_count"><%= podcast.episodes.count %> Episode</p>
+						</div>
+					</li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<%= will_paginate @podcasts %>
